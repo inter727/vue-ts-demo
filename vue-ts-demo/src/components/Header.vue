@@ -2,7 +2,7 @@
   <header>
     <div>
       <van-icon
-        v-if="pageInfoComputed.icon.arrow === 'left'"
+        v-if="this.$route.name && pageInfoComputed.icon.arrow === 'left'"
         :name="pageInfoComputed.icon.name"
         size="1.5rem"
         @click="leftHandle"
@@ -11,7 +11,7 @@
     <p>{{ pageInfoComputed.title }}</p>
     <div>
       <van-icon
-        v-if="pageInfoComputed.icon.arrow === 'right'"
+        v-if="this.$route.name && pageInfoComputed.icon.arrow === 'right'"
         :name="pageInfoComputed.icon.name"
         size="1.5rem"
         @click="rightHandle"
@@ -23,11 +23,29 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Icon } from "vant";
+import { State, Mutation } from 'vuex-class'
+import { ITodoItem, Mode } from "@/store/state";
+import { _ } from "@/utils";
 
 @Component({
   components: { [Icon.name]: Icon }
 })
 export default class Header extends Vue {
+  @State private todoItem!: ITodoItem[]
+  @Mutation private createTodoItem!: (todo: ITodoItem) => void
+
+  private createTodoItemHandle() {
+    const newItem: ITodoItem = {
+      id: _.uuid(),
+      name: "新任务",
+      isDone: false,
+      mode: Mode.edit,
+      iconName: "yingtao",
+      color: "#FFCC22"
+    };
+    this.createTodoItem(newItem);
+  }
+
   private leftHandle() {
     this.$router.back();
   }
