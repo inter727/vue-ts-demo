@@ -23,7 +23,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { Icon } from "vant";
-import { State, Mutation } from 'vuex-class'
+import { State, Mutation } from "vuex-class";
 import { ITodoItem, Mode } from "@/store/state";
 import { _ } from "@/utils";
 
@@ -31,8 +31,8 @@ import { _ } from "@/utils";
   components: { [Icon.name]: Icon }
 })
 export default class Header extends Vue {
-  @State private todoItem!: ITodoItem[]
-  @Mutation private createTodoItem!: (todo: ITodoItem) => void
+  @State private todoItem!: ITodoItem[];
+  @Mutation private createTodoItem!: (todo: ITodoItem) => void;
 
   private createTodoItemHandle() {
     const newItem: ITodoItem = {
@@ -51,6 +51,7 @@ export default class Header extends Vue {
   }
 
   private rightHandle() {
+    this.createTodoItemHandle()
     this.$router.push({ path: "/create" });
   }
 
