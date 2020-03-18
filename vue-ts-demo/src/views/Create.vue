@@ -9,7 +9,14 @@
     <!-- 任务名称 -->
     <section>
       <van-cell-group>
-        <van-field input-align="center" placeholder="请输入任务名" />
+        <van-field
+          v-model="nameComputed"
+          value="新任务"
+          input-align="center"
+          clickable
+          maxlength="6"
+          placeholder="请输入任务名"
+        />
       </van-cell-group>
     </section>
     <!-- 备选图标 -->

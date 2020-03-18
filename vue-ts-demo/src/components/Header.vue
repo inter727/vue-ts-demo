@@ -33,6 +33,7 @@ import { _ } from "@/utils";
 export default class Header extends Vue {
   @State private todoItem!: ITodoItem[];
   @Mutation private createTodoItem!: (todo: ITodoItem) => void;
+  @Mutation private finishTodoItem!: () => void;
 
   private createTodoItemHandle() {
     const newItem: ITodoItem = {
@@ -47,11 +48,12 @@ export default class Header extends Vue {
   }
 
   private leftHandle() {
+    this.finishTodoItem();
     this.$router.back();
   }
 
   private rightHandle() {
-    this.createTodoItemHandle()
+    this.createTodoItemHandle();
     this.$router.push({ path: "/create" });
   }
 
