@@ -66,7 +66,6 @@ export default class Create extends Vue {
   private colorSetting: string[] = config.colorSetting;
   private id!: string;
   private index!: number;
-  private currentItem!: ITodoItem;
   @Mutation private selectColor!: (payload: {
     id: string;
     color: string;
@@ -82,25 +81,31 @@ export default class Create extends Vue {
   @Getter private getCurrentTodoList!: ITodoItem[];
   // 获取当前将要创建的todo的id
   private created() {
-    const list = this.getCurrentTodoList;
+    const list: ITodoItem[] = this.getCurrentTodoList;
     this.index = list.length - 1;
-    const currentItem = list[this.index];
+    const currentItem: ITodoItem = list[this.index];
     this.id = currentItem.id;
   }
   // 计算当前icon名称
   private get iconComputed() {
-    const currentItem = this.getCurrentTodoList.find(({ id }) => id === this.id);
+    const currentItem: ITodoItem | undefined = this.getCurrentTodoList.find(
+      ({ id }) => id === this.id
+    );
     const { iconName } = currentItem!;
     return iconName;
   }
   // 计算当前背景颜色
   private get colorComputed() {
-    const currentItem = this.getCurrentTodoList.find(({ id }) => id === this.id);
+    const currentItem: ITodoItem | undefined = this.getCurrentTodoList.find(
+      ({ id }) => id === this.id
+    );
     const { color } = currentItem!;
     return color;
   }
   private get nameComputed() {
-    const todo = this.getCurrentTodoList.find(({ id }) => id === this.id);
+    const todo: ITodoItem | undefined = this.getCurrentTodoList.find(
+      ({ id }) => id === this.id
+    );
     const { name } = todo!;
     return name;
   }

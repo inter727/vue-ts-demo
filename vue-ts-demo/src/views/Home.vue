@@ -33,7 +33,7 @@ export default class Home extends Vue {
   @Mutation private doneTodoItem!: (id: string) => void;
   @Getter private getCurrentTodoList!: ITodoItem[];
   private get TodoListComputed() {
-    const list = this.getCurrentTodoList.filter(
+    const list: ITodoItem[] = this.getCurrentTodoList.filter(
       item => item.mode !== Mode.edit
     );
     return list;

@@ -58,7 +58,7 @@ export default class Header extends Vue {
   }
 
   private get pageInfoComputed() {
-    const currentRouteName = this.$route.name;
+    const currentRouteName: string | undefined | null = this.$route.name;
     switch (currentRouteName) {
       case "home":
         return {

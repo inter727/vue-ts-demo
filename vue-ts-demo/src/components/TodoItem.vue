@@ -44,14 +44,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import {
-  Circle,
-  Button,
-  SwipeCell,
-  Cell,
-  CellGroup,
-  Icon
-} from "vant";
+import { Circle, Button, SwipeCell, Cell, CellGroup, Icon } from "vant";
 
 @Component({
   components: {
