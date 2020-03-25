@@ -51,7 +51,6 @@ import { SwipeCell, Cell, CellGroup, Field } from "vant";
 import { ITodoItem } from "@/store/state";
 import Circle from "../components/Circle.vue";
 import { config } from "@/config.ts";
-import { _ } from "@/utils";
 
 @Component({
   components: {
@@ -82,7 +81,7 @@ export default class Create extends Vue {
   }) => void;
   @Getter private getCurrentTodoList!: ITodoItem[];
   // 获取当前将要创建的todo的id
-  private mounted() {
+  private created() {
     const list = this.getCurrentTodoList;
     this.index = list.length - 1;
     const currentItem = list[this.index];
@@ -90,28 +89,29 @@ export default class Create extends Vue {
   }
   // 计算当前icon名称
   private get iconComputed() {
-    const currentItem = _.find(this.getCurrentTodoList, this.id);
+    const currentItem = this.getCurrentTodoList.find(({ id }) => id === this.id);
     const { iconName } = currentItem!;
     return iconName;
   }
   // 计算当前背景颜色
   private get colorComputed() {
-    const currentItem = _.find(this.getCurrentTodoList, this.id);
+    const currentItem = this.getCurrentTodoList.find(({ id }) => id === this.id);
     const { color } = currentItem!;
     return color;
+  }
+  private get nameComputed() {
+    const todo = this.getCurrentTodoList.find(({ id }) => id === this.id);
+    const { name } = todo!;
+    return name;
+  }
+  private set nameComputed(name) {
+    this.changeName({ id: this.id, value: name });
   }
   private changeColorHandle(color: string) {
     this.selectColor({ id: this.id, color });
   }
   private handleIconHandle(name: string) {
     this.selectIcon({ id: this.id, icon: name });
-  }
-  private get nameComputed() {
-    const todo = _.find(this.getCurrentTodoList, this.id);
-    return todo!.name;
-  }
-  private set nameComputed(name) {
-    this.changeName({ id: this.id, value: name });
   }
 }
 </script>
